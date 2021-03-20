@@ -86,14 +86,13 @@ api.get("/", async (request, response) =>
         date2.valueOf() - date1.valueOf()
     );
 
-  entries.forEach(({ extra }) => console.log(extra));
-
   const html = entries
     .reduce(
-      (html, { title, link, description }) =>
+      (html, { title, link, description, date }) =>
         html +
         `<article>`+
           `<h2><a href='${link}'>${title}</a></h2>`+
+          `<time datetime='${date.toISOString()}'>${date.toLocaleString()}</time>`+
           `<p>${description}</p>`+
         `</article>`,
       ""
