@@ -92,7 +92,10 @@ api.get("/", async (request, response) =>
         html +
         `<article>`+
           `<h2><a href='${link}'>${title}</a></h2>`+
-          `<time datetime='${date.toISOString()}'>${date.toLocaleString()}</time>`+
+          `<time datetime='${date.toISOString()}'>${date.toLocaleString("en-US", {
+            dateStyle: "short",
+            timeStyle: "short"
+          })}</time>`+
           `<p>${description}</p>`+
         `</article>`,
       ""
