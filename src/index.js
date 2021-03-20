@@ -46,6 +46,16 @@ const processFeed =
         date: new Date(pubDate),
         extra
       })
+  },
+  "www.theguardian.com": {
+    extract: (data) => [],
+    normalize: (data) =>
+      ({
+        title: "",
+        link: "#",
+        description: "",
+        date: new Date(),
+      }),
   }
 };
 
