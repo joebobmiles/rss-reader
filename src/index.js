@@ -6,25 +6,25 @@ const api = express();
 
 const sources =
 [
-  {
-    type: "youtube",
-    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UC2wac-sRkNMPSFEnaOHCL3g",
-  },
-  {
-    type: "nytimes",
-    url: "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
-  }
+  "https://www.youtube.com/feeds/videos.xml?channel_id=UC2wac-sRkNMPSFEnaOHCL3g",
+  "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
 ];
+
+const getType = (url) =>
+{
+  const type = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
+  return type && type[1];
+}
 
 const extract =
 {
-  youtube: ({ feed: { entry }}) => entry,
-  nytimes: ({ rss: { channel: [ { item } ] } }) => item
+  "www.youtube.com": ({ feed: { entry }}) => entry,
+  "rss.nytimes.com": ({ rss: { channel: [ { item } ] } }) => item
 };
 
 const normalize =
 {
-  youtube: ({
+  "www.youtube.com": ({
     title: [ title ],
     link: [ { $: { href: link } } ],
     published: [ published ],
@@ -37,7 +37,7 @@ const normalize =
       date: new Date(published),
       extra
     }),
-  nytimes: ({
+  "rss.nytimes.com": ({
     title: [ title ],
     link: [ link ],
     description: [ description ],
@@ -57,12 +57,12 @@ const retrieveFeedsFrom = (sources) =>
   Promise.all(
     sources
     .reduce(
-      (feeds, { type, url }) =>
+      (feeds, url) =>
         feeds.concat(
           fetch(url)
             .then((response) => response.text())
             .then((text) => new xml2js.Parser().parseStringPromise(text))
-            .then((data) => ({ type, data }))
+            .then((data) => ({ url, data }))
         ),
       []
     )
@@ -74,9 +74,10 @@ api.get("/", async (request, response) =>
 
   const entries = feeds
     .reduce(
-      (entries, { type, data }) =>
+      (entries, { url, data }) =>
         entries.concat(
-          extract[type](data).map((entry) => normalize[type](entry))
+          extract[getType(url)](data)
+            .map((entry) => normalize[getType(url)](entry))
         ),
       []
     )
