@@ -63,15 +63,19 @@ const retrieveFeedsFrom = (sources) =>
 
 api.get("/", async (request, response) =>
 {
-  const entries = (await retrieveFeedsFrom(sources)).reduce(
+  const html = (await retrieveFeedsFrom(sources)).reduce(
     (entries, { type, data }) =>
       entries.concat(
         extract[type](data).map((entry) => normalize[type](entry))
       ),
     []
+  ).reduce(
+    (html, { title, link, description }) =>
+      html + `<article><h2><a href='${link}'>${title}</a></h2><p>${description}</p></article>`,
+    ""
   );
 
-  response.send(entries);
+  response.send(`<html><body>${html}</body></html>`);
 });
 
 api.listen(8080, () => {
