@@ -27,22 +27,30 @@ const normalize =
   youtube: ({
     title: [ title ],
     link: [ { $: { href: link } } ],
-    "media:group": [ { "media:description": [ description] } ]
+    published: [ published ],
+    "media:group": [ { "media:description": [ description] } ],
+    ...extra
   }) =>
     ({
       title,
       link,
-      description
+      description,
+      date: new Date(published),
+      extra
     }),
   nytimes: ({
     title: [ title ],
     link: [ link ],
-    description: [ description ]
+    description: [ description ],
+    pubDate,
+    ...extra
   }) =>
     ({
       title,
       link,
-      description
+      description,
+      date: new Date(pubDate),
+      extra
     })
 };
 
@@ -63,17 +71,33 @@ const retrieveFeedsFrom = (sources) =>
 
 api.get("/", async (request, response) =>
 {
-  const html = (await retrieveFeedsFrom(sources)).reduce(
-    (entries, { type, data }) =>
-      entries.concat(
-        extract[type](data).map((entry) => normalize[type](entry))
-      ),
-    []
-  ).reduce(
-    (html, { title, link, description }) =>
-      html + `<article><h2><a href='${link}'>${title}</a></h2><p>${description}</p></article>`,
-    ""
-  );
+  const feeds = (await retrieveFeedsFrom(sources));
+
+  const entries = feeds
+    .reduce(
+      (entries, { type, data }) =>
+        entries.concat(
+          extract[type](data).map((entry) => normalize[type](entry))
+        ),
+      []
+    )
+    .sort(
+      ({ date: date1 }, { date: date2 }) =>
+        date2.valueOf() - date1.valueOf()
+    );
+
+  entries.forEach(({ extra }) => console.log(extra));
+
+  const html = entries
+    .reduce(
+      (html, { title, link, description }) =>
+        html +
+        `<article>`+
+          `<h2><a href='${link}'>${title}</a></h2>`+
+          `<p>${description}</p>`+
+        `</article>`,
+      ""
+    );
 
   response.send(`<html><body>${html}</body></html>`);
 });
