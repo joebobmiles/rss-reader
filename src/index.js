@@ -100,7 +100,12 @@ api.get("/", async (request, response) =>
       ""
     );
 
-  response.send(`<html><body>${html}</body></html>`);
+  response.send(
+    `<html>`+
+      `<head><title>Hullabaloo</title></head>`+
+      `<body>${html}</body>`+
+    `</html>`
+  );
 });
 
 api.listen(8080, () => {
