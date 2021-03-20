@@ -12,7 +12,7 @@ const getType = (url) =>
   return type && type[1];
 }
 
-const process =
+const processFeed =
 {
   "www.youtube.com": {
     extract: ({ feed: { entry }}) => entry,
@@ -72,8 +72,8 @@ api.get("/", async (request, response) =>
     .reduce(
       (entries, { url, data }) =>
         entries.concat(
-          process[getType(url)].extract(data)
-            .map((entry) => process[getType(url)].normalize(entry))
+          processFeed[getType(url)].extract(data)
+            .map((entry) => processFeed[getType(url)].normalize(entry))
         ),
       []
     )
@@ -105,6 +105,6 @@ api.get("/", async (request, response) =>
   );
 });
 
-api.listen(8080, () => {
+api.listen(process.env.PORT || 8080, () => {
   console.info("Running...");
 });
