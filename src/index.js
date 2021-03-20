@@ -16,41 +16,41 @@ const getType = (url) =>
   return type && type[1];
 }
 
-const extract =
+const process =
 {
-  "www.youtube.com": ({ feed: { entry }}) => entry,
-  "rss.nytimes.com": ({ rss: { channel: [ { item } ] } }) => item
-};
-
-const normalize =
-{
-  "www.youtube.com": ({
-    title: [ title ],
-    link: [ { $: { href: link } } ],
-    published: [ published ],
-    ...extra
-  }) =>
-    ({
-      title,
-      link,
-      description: "",
-      date: new Date(published),
-      extra
-    }),
-  "rss.nytimes.com": ({
-    title: [ title ],
-    link: [ link ],
-    description: [ description ],
-    pubDate,
-    ...extra
-  }) =>
-    ({
-      title,
-      link,
-      description,
-      date: new Date(pubDate),
-      extra
-    })
+  "www.youtube.com": {
+    extract: ({ feed: { entry }}) => entry,
+    normalize: ({
+      title: [ title ],
+      link: [ { $: { href: link } } ],
+      published: [ published ],
+      ...extra
+    }) =>
+      ({
+        title,
+        link,
+        description: "",
+        date: new Date(published),
+        extra
+      }),
+  },
+  "rss.nytimes.com": {
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      description: [ description ],
+      pubDate,
+      ...extra
+    }) =>
+      ({
+        title,
+        link,
+        description,
+        date: new Date(pubDate),
+        extra
+      })
+  }
 };
 
 const retrieveFeedsFrom = (sources) =>
@@ -76,8 +76,8 @@ api.get("/", async (request, response) =>
     .reduce(
       (entries, { url, data }) =>
         entries.concat(
-          extract[getType(url)](data)
-            .map((entry) => normalize[getType(url)](entry))
+          process[getType(url)].extract(data)
+            .map((entry) => process[getType(url)].normalize(entry))
         ),
       []
     )
