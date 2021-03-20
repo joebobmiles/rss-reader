@@ -28,13 +28,12 @@ const normalize =
     title: [ title ],
     link: [ { $: { href: link } } ],
     published: [ published ],
-    "media:group": [ { "media:description": [ description] } ],
     ...extra
   }) =>
     ({
       title,
       link,
-      description,
+      description: "",
       date: new Date(published),
       extra
     }),
