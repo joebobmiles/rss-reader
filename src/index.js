@@ -4,11 +4,7 @@ const fetch = require("node-fetch");
 
 const api = express();
 
-const sources =
-[
-  "https://www.youtube.com/feeds/videos.xml?channel_id=UC2wac-sRkNMPSFEnaOHCL3g",
-  "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
-];
+const sources = require("./sources.json");
 
 const getType = (url) =>
 {
