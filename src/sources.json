@@ -1,5 +1,6 @@
 [
   "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
   "https://www.theguardian.com/world/rss",
-  "https://www.theguardian.com/us-news/rss"
+  "https://www.theguardian.com/us-news/rss",
+  "https://hnrss.org/frontpage",
 ]

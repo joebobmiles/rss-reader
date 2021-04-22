@@ -57,6 +57,21 @@ const processFeed =
         description,
         date: new Date(date),
       }),
+  },
+  "hnrss.org": {
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      pubDate: [ date ]
+    }) =>
+      ({
+        title,
+        link,
+        description: "",
+        date: new Date(date),
+      }),
+  },
   }
 };
 
