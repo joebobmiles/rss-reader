@@ -19,15 +19,13 @@ const processFeed =
     normalize: ({
       title: [ title ],
       link: [ { $: { href: link } } ],
-      published: [ published ],
-      ...extra
+      published: [ published ]
     }) =>
       ({
         title,
         link,
         description: "",
-        date: new Date(published),
-        extra
+        date: new Date(published)
       }),
   },
   "rss.nytimes.com": {
@@ -36,15 +34,13 @@ const processFeed =
       title: [ title ],
       link: [ link ],
       description: [ description ],
-      pubDate,
-      ...extra
+      pubDate
     }) =>
       ({
         title,
         link,
         description,
-        date: new Date(pubDate),
-        extra
+        date: new Date(pubDate)
       })
   },
   "www.theguardian.com": {
