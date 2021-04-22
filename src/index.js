@@ -72,6 +72,19 @@ const processFeed =
         date: new Date(date),
       }),
   },
+  "lobste.rs": {
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      pubDate: [ date ]
+    }) =>
+      ({
+        title,
+        link,
+        description: "",
+        date: new Date(date),
+      }),
   }
 };
 
