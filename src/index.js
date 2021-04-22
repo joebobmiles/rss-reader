@@ -48,13 +48,18 @@ const processFeed =
       })
   },
   "www.theguardian.com": {
-    extract: (data) => [],
-    normalize: (data) =>
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      description: [ description ],
+      pubDate: [ date ]
+    }) =>
       ({
-        title: "",
-        link: "#",
-        description: "",
-        date: new Date(),
+        title,
+        link,
+        description,
+        date: new Date(date),
       }),
   }
 };
