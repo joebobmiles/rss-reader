@@ -88,6 +88,14 @@ api.get("/", async (request, response) =>
         ),
       []
     )
+    // TODO: This is bad! We should be de-duping via guid instead!
+    .reduce(
+      (entries, entry) =>
+        entries.some(({ title }) => title === entry.title) === false
+        ? entries.concat(entry)
+        : entries,
+      []
+    )
     .sort(
       ({ date: date1 }, { date: date2 }) =>
         date2.valueOf() - date1.valueOf()
