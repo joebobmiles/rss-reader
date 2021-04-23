@@ -119,10 +119,9 @@ api.get("/", async (request, response) =>
         ),
       []
     )
-    // TODO: This is bad! We should be de-duping via guid instead!
     .reduce(
       (entries, entry) =>
-        entries.some(({ title }) => title === entry.title) === false
+        entries.some(({ link }) => link === entry.link) === false
         ? entries.concat(entry)
         : entries,
       []
