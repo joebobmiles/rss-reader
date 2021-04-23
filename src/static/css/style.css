@@ -107,6 +107,19 @@ article * + * {
     margin-top: 1rem;
 }
 
+article ul > li {
+    padding-left: 2ch;
+}
+
+article ul > li::before {
+    position: absolute;
+    content: "-";
+
+    transform: translateX(-2ch);
+
+    color: inherit;
+}
+
 main time {
     display: inline-block;
 }
