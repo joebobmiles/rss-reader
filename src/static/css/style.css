@@ -31,6 +31,13 @@
     --bg: white;
 }
 
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --fg: white;
+        --bg: black;
+    }
+}
+
 html {
     z-index: 0;
     position: relative;
