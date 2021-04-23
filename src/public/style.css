@@ -43,7 +43,7 @@ main * + * {
     margin-top: 1rem;
 }
 
-main a, main time {
+main time {
     display: inline-block;
 }
 
