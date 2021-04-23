@@ -30,6 +30,10 @@ body {
     padding: 1rem 1ch;
 }
 
+header {
+    padding-left: 1ch;
+}
+
 header h1 {
     text-transform: uppercase;
     font-weight: 700;
