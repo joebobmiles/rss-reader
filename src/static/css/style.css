@@ -27,14 +27,17 @@
 }
 
 :root {
-    --fg: black;
-    --bg: white;
+    --white: white;
+    --black: black;
+
+    --fg: var(--black);
+    --bg: var(--white);
 }
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --fg: white;
-        --bg: black;
+        --fg: var(--white);
+        --bg: var(--black);
     }
 }
 
