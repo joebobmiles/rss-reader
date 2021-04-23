@@ -127,6 +127,10 @@ api.get("/", async (request, response) =>
         : entries,
       []
     )
+    .filter(
+      ({ date }) =>
+        ((Date.now() - date) / (1000 * 60 * 60)) <= 24
+    )
     .sort(
       ({ date: date1 }, { date: date2 }) =>
         date2.valueOf() - date1.valueOf()
