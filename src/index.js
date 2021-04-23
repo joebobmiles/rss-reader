@@ -13,6 +13,23 @@ const getType = (url) =>
   return type && type[1];
 }
 
+const substackFeed =
+{
+  extract: ({ rss: { channel: [ { item } ] } }) => item,
+  normalize: ({
+    title: [ title ],
+    link: [ link ],
+    description: [ description ],
+    pubDate: [ date ]
+  }) =>
+    ({
+      title,
+      link,
+      description,
+      date: new Date(date),
+    }),
+};
+
 const processFeed =
 {
   "www.youtube.com": {
@@ -87,21 +104,7 @@ const processFeed =
         date: new Date(date),
       }),
   },
-  "greenwald.substack.com": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      description: [ description ],
-      pubDate: [ date ]
-    }) =>
-      ({
-        title,
-        link,
-        description,
-        date: new Date(date),
-      }),
-  }
+  "greenwald.substack.com": substackFeed,
 };
 
 const retrieveFeedsFrom = (sources) =>
