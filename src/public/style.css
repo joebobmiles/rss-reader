@@ -26,3 +26,11 @@ html *::after {
 main {
     max-width: 55ch;
 }
+
+main * + * {
+    margin-top: 1rem;
+}
+
+main a, main time {
+    display: inline-block;
+}
