@@ -29,15 +29,20 @@
 :root {
     --white: white;
     --black: black;
+    --blue: blue;
 
     --fg: var(--black);
     --bg: var(--white);
+    --anchor-fg: var(--blue);
 }
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
+        --magenta: magenta;
+
         --fg: var(--white);
         --bg: var(--black);
+        --anchor-fg: var(--magenta)
     }
 }
 
