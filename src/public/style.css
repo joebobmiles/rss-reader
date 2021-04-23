@@ -24,6 +24,8 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: max-content minmax(max-content, 1fr);
 
+    row-gap: 3rem;
+
     padding: 1rem 1ch;
 }
 
