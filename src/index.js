@@ -25,7 +25,7 @@ const processFeed =
       ({
         title,
         link,
-        description: "",
+        description: null,
         date: new Date(published)
       }),
   },
@@ -69,7 +69,7 @@ const processFeed =
       ({
         title,
         link,
-        description: "",
+        description: null,
         date: new Date(date),
       }),
   },
@@ -83,7 +83,7 @@ const processFeed =
       ({
         title,
         link,
-        description: "",
+        description: null,
         date: new Date(date),
       }),
   }
