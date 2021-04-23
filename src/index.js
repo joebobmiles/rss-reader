@@ -154,7 +154,12 @@ api.get("/", async (request, response) =>
         `<link rel="stylesheet" type="text/css" href="static/style.css">`+
         `<title>Hullabaloo</title>`+
       `</head>`+
-      `<body>${html}</body>`+
+      `<body>`+
+        `<div id="site-container">`+
+          `<header><h1>Hullabaloo</h1></header>`+
+          `<main>${html}</main>`+
+        `</div>`+
+      `</body>`+
     `</html>`
   );
 });
