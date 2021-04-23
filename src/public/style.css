@@ -22,3 +22,7 @@ html *::after {
 
     padding: 1rem 1ch;
 }
+
+main {
+    max-width: 55ch;
+}
