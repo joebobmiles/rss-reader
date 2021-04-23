@@ -19,4 +19,6 @@ html *::after {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: max-content minmax(max-content, 1fr);
+
+    padding: 1rem 1ch;
 }
