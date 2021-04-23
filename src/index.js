@@ -150,8 +150,8 @@ api.get("/", async (request, response) =>
   response.send(
     `<html>`+
       `<head>`+
-        `<link rel="stylesheet" type="text/css" href="static/reset.css">`+
-        `<link rel="stylesheet" type="text/css" href="static/style.css">`+
+        `<link rel="stylesheet" type="text/css" href="static/css/reset.css">`+
+        `<link rel="stylesheet" type="text/css" href="static/css/style.css">`+
         `<title>Hullabaloo</title>`+
       `</head>`+
       `<body>`+
