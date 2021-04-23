@@ -111,6 +111,9 @@ api.get("/", async (request, response) =>
   const feeds = (await retrieveFeedsFrom(sources));
 
   const entries = feeds
+    .filter(
+      ({ data }) => data.rss !== undefined
+    )
     .reduce(
       (entries, { url, data }) =>
         entries.concat(
