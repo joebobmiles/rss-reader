@@ -27,8 +27,8 @@
 }
 
 :root {
-    --white: white;
-    --black: black;
+    --white: #fffcf9;
+    --black: #080708;
     --blue: blue;
 
     --fg: var(--black);
