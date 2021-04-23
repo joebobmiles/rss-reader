@@ -27,9 +27,9 @@
 }
 
 :root {
-    --white: #fffcf9;
+    --white: #FFFCF9;
     --black: #080708;
-    --blue: blue;
+    --blue: #0074D9;
 
     --fg: var(--black);
     --bg: var(--white);
@@ -38,7 +38,7 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --magenta: magenta;
+        --magenta: #F012BE;
 
         --fg: var(--white);
         --bg: var(--black);
