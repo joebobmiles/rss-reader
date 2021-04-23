@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const xml2js = require("xml2js");
 const fetch = require("node-fetch");
@@ -103,6 +104,8 @@ const retrieveFeedsFrom = (sources) =>
     )
   );
 
+api.use("/static", express.static(path.join(__dirname, "public")));
+
 api.get("/", async (request, response) =>
 {
   const feeds = (await retrieveFeedsFrom(sources));
@@ -146,13 +149,15 @@ api.get("/", async (request, response) =>
 
   response.send(
     `<html>`+
-      `<head><title>Hullabaloo</title></head>`+
+      `<head>`+
+        `<link rel="stylesheet" type="text/css" href="static/index.css">`+
+        `<title>Hullabaloo</title>`+
+      `</head>`+
       `<body>${html}</body>`+
     `</html>`
   );
 });
 
-api.use("/static", express.static("public"));
 api.listen(process.env.PORT || 8080, () => {
   console.info("Running...");
 });
