@@ -29,6 +29,11 @@ body {
     padding: 1rem 1ch;
 }
 
+header h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
 main {
     max-width: 55ch;
 }
