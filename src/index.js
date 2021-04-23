@@ -152,6 +152,7 @@ api.get("/", async (request, response) =>
   );
 });
 
+api.use("/static", express.static("public"));
 api.listen(process.env.PORT || 8080, () => {
   console.info("Running...");
 });
