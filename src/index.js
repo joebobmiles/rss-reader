@@ -151,7 +151,7 @@ api.get("/", async (request, response) =>
     `<html>`+
       `<head>`+
         `<link rel="stylesheet" type="text/css" href="static/reset.css">`+
-        `<link rel="stylesheet" type="text/css" href="static/index.css">`+
+        `<link rel="stylesheet" type="text/css" href="static/style.css">`+
         `<title>Hullabaloo</title>`+
       `</head>`+
       `<body>${html}</body>`+
