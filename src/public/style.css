@@ -37,6 +37,10 @@ header h1 {
 
 main {
     max-width: 55ch;
+
+    display: grid;
+    grid-auto-rows: max-content;
+    row-gap: 1.5rem;
 }
 
 article * + * {
