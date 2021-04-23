@@ -105,6 +105,9 @@ const processFeed =
       }),
   },
   "greenwald.substack.com": substackFeed,
+  "subconscious.substack.com": substackFeed,
+  "noahpinion.substack.com": substackFeed,
+  "residentcontrarian.substack.com": substackFeed,
 };
 
 const retrieveFeedsFrom = (sources) =>
