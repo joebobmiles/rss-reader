@@ -3,5 +3,22 @@
   "https://www.theguardian.com/world/rss",
   "https://www.theguardian.com/us-news/rss",
   "https://hnrss.org/frontpage",
-  "https://lobste.rs/t/programming.rss"
+  "https://lobste.rs/t/programming.rss",
+  "https://lobste.rs/t/osdev.rss",
+  "https://lobste.rs/t/plt.rss",
+  "https://lobste.rs/t/culture.rss",
+  "https://lobste.rs/t/philosophy.rss",
+  "https://lobste.rs/t/person.rss",
+  "https://lobste.rs/t/programming.books.rss",
+  "https://lobste.rs/t/assembly.rss",
+  "https://lobste.rs/t/c.rss",
+  "https://lobste.rs/t/clojure.rss",
+  "https://lobste.rs/t/lisp.rss",
+  "https://lobste.rs/t/perl.rss",
+  "https://lobste.rs/t/compilers.rss",
+  "https://lobste.rs/t/reversing.rss",
+  "https://lobste.rs/t/privacy.rss",
+  "https://lobste.rs/t/api.rss",
+  "https://lobste.rs/t/linux.security.rss",
+  "https://lobste.rs/t/windows.security.rss"
 ]
