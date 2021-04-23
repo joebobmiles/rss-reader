@@ -108,6 +108,21 @@ const processFeed =
   "subconscious.substack.com": substackFeed,
   "noahpinion.substack.com": substackFeed,
   "residentcontrarian.substack.com": substackFeed,
+  "codeforscience.org": {
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      description: [ description ],
+      pubDate: [ date ]
+    }) =>
+      ({
+        title,
+        link,
+        description,
+        date: new Date(date),
+      }),
+  },
 };
 
 const retrieveFeedsFrom = (sources) =>
