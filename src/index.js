@@ -104,7 +104,7 @@ const retrieveFeedsFrom = (sources) =>
     )
   );
 
-api.use("/static", express.static(path.join(__dirname, "public")));
+api.use("/static", express.static(path.join(__dirname, "static")));
 
 api.get("/", async (request, response) =>
 {
