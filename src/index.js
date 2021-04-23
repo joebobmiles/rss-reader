@@ -142,7 +142,7 @@ api.get("/", async (request, response) =>
             dateStyle: "short",
             timeStyle: "short"
           })}</time>`+
-          `<p>${description}</p>`+
+          (description ? `<p>${description}</p>` : "")+
         `</article>`,
       ""
     );
