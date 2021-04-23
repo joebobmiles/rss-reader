@@ -86,6 +86,21 @@ const processFeed =
         description: null,
         date: new Date(date),
       }),
+  },
+  "greenwald.substack.com": {
+    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    normalize: ({
+      title: [ title ],
+      link: [ link ],
+      description: [ description ],
+      pubDate: [ date ]
+    }) =>
+      ({
+        title,
+        link,
+        description,
+        date: new Date(date),
+      }),
   }
 };
 
