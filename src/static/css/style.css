@@ -26,6 +26,11 @@
     font-style: italic;
 }
 
+:root {
+    --fg: black;
+    --bg: white;
+}
+
 html {
     z-index: 0;
     position: relative;
@@ -43,6 +48,9 @@ html *::after {
 body {
     font-family: Roboto Mono, Monaco, Consolas, monospace;
     line-height: 1.5rem;
+
+    color: var(--fg);
+    background-color: var(--bg);
 }
 
 #site-container {
