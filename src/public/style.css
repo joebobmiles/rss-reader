@@ -39,7 +39,7 @@ main {
     max-width: 55ch;
 }
 
-main * + * {
+article * + * {
     margin-top: 1rem;
 }
 
