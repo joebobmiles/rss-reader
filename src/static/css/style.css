@@ -38,11 +38,8 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --magenta: #F012BE;
-
         --fg: var(--ghost-white);
         --bg: var(--space-cadet);
-        --anchor-fg: var(--magenta)
     }
 }
 
