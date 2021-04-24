@@ -132,6 +132,10 @@ a:any-link {
     color: var(--anchor-fg);
 }
 
+article h2 {
+    font-weight: 700;
+}
+
 article h2 a:any-link {
     border: none;
 
