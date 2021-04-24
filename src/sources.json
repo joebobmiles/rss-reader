@@ -2,25 +2,82 @@
   "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
   "https://www.theguardian.com/world/rss",
   "https://www.theguardian.com/us-news/rss",
-  "https://hnrss.org/frontpage",
-  "https://lobste.rs/t/programming.rss",
-  "https://lobste.rs/t/osdev.rss",
-  "https://lobste.rs/t/plt.rss",
-  "https://lobste.rs/t/culture.rss",
-  "https://lobste.rs/t/philosophy.rss",
-  "https://lobste.rs/t/person.rss",
-  "https://lobste.rs/t/programming.books.rss",
-  "https://lobste.rs/t/assembly.rss",
-  "https://lobste.rs/t/c.rss",
-  "https://lobste.rs/t/clojure.rss",
-  "https://lobste.rs/t/lisp.rss",
-  "https://lobste.rs/t/perl.rss",
-  "https://lobste.rs/t/compilers.rss",
-  "https://lobste.rs/t/reversing.rss",
-  "https://lobste.rs/t/privacy.rss",
-  "https://lobste.rs/t/api.rss",
-  "https://lobste.rs/t/linux.security.rss",
-  "https://lobste.rs/t/windows.security.rss",
+  {
+    "url": "https://hnrss.org/frontpage",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/programming.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/osdev.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/plt.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/culture.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/philosophy.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/person.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/programming.books.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/assembly.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/c.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/clojure.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/lisp.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/perl.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/compilers.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/reversing.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/privacy.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/api.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/linux.security.rss",
+    "includeDescription": false
+  },
+  {
+    "url": "https://lobste.rs/t/windows.security.rss",
+    "includeDescription": false
+  },
   "https://greenwald.substack.com/feed",
   "https://subconscious.substack.com/feed",
   "https://noahpinion.substack.com/feed",
