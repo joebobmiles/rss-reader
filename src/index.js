@@ -6,6 +6,7 @@ const fetch = require("node-fetch");
 const api = express();
 
 const sources = require("./sources.json");
+const { type } = require("os");
 
 const domainToTypeMap =
 {
@@ -91,17 +92,52 @@ const processFeed =
   },
 };
 
+const fetchDataFrom = (url) =>
+  fetch(url)
+    .then((response) => response.text())
+    .then((text) => new xml2js.Parser().parseStringPromise(text));
+
+const defaultOptions =
+{
+  type: "rss",
+  includeDescription: true,
+};
+
+const parseUrlOrConfig = (urlOrConfig) =>
+  ({
+    ...defaultOptions,
+    ...(
+      typeof(urlOrConfig) === "string"
+      ? {
+        url: urlOrConfig
+      }
+      : {
+        ...urlOrConfig,
+      }
+    )
+  });
+
 const retrieveFeedsFrom = (sources) =>
   Promise.all(
     sources
     .reduce(
-      (feeds, url) =>
-        feeds.concat(
-          fetch(url)
-            .then((response) => response.text())
-            .then((text) => new xml2js.Parser().parseStringPromise(text))
-            .then((data) => ({ url, data }))
-        ),
+      (feeds, urlOrConfig) =>
+      {
+        const {
+          url,
+          ...config
+        } = parseUrlOrConfig(urlOrConfig);
+
+        return feeds.concat(
+          fetchDataFrom(url)
+          .then((data) =>
+          ({
+            url,
+            config,
+            data
+          }))
+        );
+      },
       []
     )
   );
@@ -117,16 +153,13 @@ api.get("/", async (request, response) =>
       ({ data }) => data.rss !== undefined
     )
     .reduce(
-      (entries, { url, data }) =>
+      (entries, { url, config: { type, ...options }, data }) =>
         entries.concat(
           processFeed[getType(url)].extract(data)
             .map((entry) =>
               ({
                 domain: getDomain(url),
-                ...processFeed[getType(url)].normalize(
-                  entry,
-                  domainToOptionsMap[getDomain(url)]
-                )
+                ...processFeed[type].normalize(entry, options)
               })
             )
         ),
