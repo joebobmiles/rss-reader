@@ -27,12 +27,12 @@
 }
 
 :root {
-    --white: #FFFCF9;
-    --black: #080708;
-    --blue: #0074D9;
+    --ghost-white: #FBFBFF;
+    --space-cadet: #141B41;
+    --blue: #3772FF;
 
-    --fg: var(--black);
-    --bg: var(--white);
+    --fg: var(--space-cadet);
+    --bg: var(--ghost-white);
     --anchor-fg: var(--blue);
 }
 
@@ -40,8 +40,8 @@
     :root {
         --magenta: #F012BE;
 
-        --fg: var(--white);
-        --bg: var(--black);
+        --fg: var(--ghost-white);
+        --bg: var(--space-cadet);
         --anchor-fg: var(--magenta)
     }
 }
