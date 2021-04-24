@@ -121,13 +121,13 @@ api.get("/", async (request, response) =>
         entries.concat(
           processFeed[getType(url)].extract(data)
             .map((entry) =>
-            ({
-              domain: getDomain(url),
-              ...processFeed[getType(url)].normalize(
-                entry,
-                domainToOptionsMap[getDomain(url)]
-              )
-            })
+              ({
+                domain: getDomain(url),
+                ...processFeed[getType(url)].normalize(
+                  entry,
+                  domainToOptionsMap[getDomain(url)]
+                )
+              })
             )
         ),
       []
