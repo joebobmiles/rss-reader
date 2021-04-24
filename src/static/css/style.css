@@ -103,9 +103,17 @@ article {
     grid-template-columns: 20ch 1fr;
     grid-template-rows: 1fr;
     column-gap: 1rem;
+
+    grid-template-areas: "aside section";
+}
+
+article > aside {
+    grid-area: aside;
 }
 
 article > section {
+    grid-area: section;
+
     max-width: 55ch;
 
     border: 2px solid;
