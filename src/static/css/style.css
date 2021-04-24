@@ -78,7 +78,7 @@ body {
 
     row-gap: 3rem;
 
-    padding: 1rem 1ch;
+    padding: 1rem;
 }
 
 header {
@@ -101,7 +101,7 @@ main {
 
 article {
     border: 1px solid;
-    padding: 1rem 1ch;
+    padding: 1rem;
 }
 
 article * + * {
