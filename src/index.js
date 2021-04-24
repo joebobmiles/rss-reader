@@ -187,6 +187,7 @@ api.get("/", async (request, response) =>
               dateStyle: "short",
               timeStyle: "short"
             })}</time>`+
+            `<p>Via ${"a random feed"}</p>`+
           `</aside>`+
           `<section>`+
             `<h2><a href='${link}'>${title}</a></h2>`+
