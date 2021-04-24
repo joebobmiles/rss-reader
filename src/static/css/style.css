@@ -92,6 +92,7 @@ header h1 {
 
 main {
     max-width: 55ch;
+    justify-self: center;
 
     display: grid;
     grid-auto-rows: max-content;
