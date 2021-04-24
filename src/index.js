@@ -182,12 +182,16 @@ api.get("/", async (request, response) =>
       (html, { title, link, description, date }) =>
         html +
         `<article>`+
-          `<h2><a href='${link}'>${title}</a></h2>`+
-          `<time datetime='${date.toISOString()}'>${date.toLocaleString("en-US", {
-            dateStyle: "short",
-            timeStyle: "short"
-          })}</time>`+
-          (description ? `<p>${description}</p>` : "")+
+          `<aside>`+
+            `<time datetime='${date.toISOString()}'>${date.toLocaleString("en-US", {
+              dateStyle: "short",
+              timeStyle: "short"
+            })}</time>`+
+          `</aside>`+
+          `<section>`+
+            `<h2><a href='${link}'>${title}</a></h2>`+
+            (description ? `<p>${description}</p>` : "")+
+          `</section>`+
         `</article>`,
       ""
     );
