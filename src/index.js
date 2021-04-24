@@ -23,10 +23,15 @@ const domainToTypeMap =
   "mattsclancy.substack.com": "substack",
 };
 
-const getType = (url) =>
+const getDomain = (url) =>
 {
   const domain = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
-  return domainToTypeMap[domain && domain[1]];
+  return domain && domain[1];
+}
+
+const getType = (url) =>
+{
+  return domainToTypeMap[getDomain(url)];
 }
 
 const substackFeed =
@@ -167,7 +172,12 @@ api.get("/", async (request, response) =>
       (entries, { url, data }) =>
         entries.concat(
           processFeed[getType(url)].extract(data)
-            .map((entry) => processFeed[getType(url)].normalize(entry))
+            .map((entry) =>
+            ({
+              domain: getDomain(url),
+              ...processFeed[getType(url)].normalize(entry)
+            })
+            )
         ),
       []
     )
@@ -189,7 +199,7 @@ api.get("/", async (request, response) =>
 
   const html = entries
     .reduce(
-      (html, { title, link, description, date }) =>
+      (html, { title, link, description, date, domain }) =>
         html +
         `<article>`+
           `<aside>`+
@@ -197,7 +207,7 @@ api.get("/", async (request, response) =>
               dateStyle: "short",
               timeStyle: "short"
             })}</time>`+
-            `<p>Via ${"a random feed"}</p>`+
+            `<p>Via ${domain}</p>`+
           `</aside>`+
           `<section>`+
             `<h2><a href='${link}'>${title}</a></h2>`+
