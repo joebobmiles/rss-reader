@@ -6,49 +6,11 @@ const fetch = require("node-fetch");
 const api = express();
 
 const sources = require("./sources.json");
-const { type } = require("os");
-
-const domainToTypeMap =
-{
-  "rss.nytimes.com": "rss",
-  "www.theguardian.com": "rss",
-  "hnrss.org": "rss",
-  "lobste.rs": "rss",
-  "greenwald.substack.com": "rss",
-  "subconscious.substack.com": "rss",
-  "noahpinion.substack.com": "rss",
-  "residentcontrarian.substack.com": "rss",
-  "codeforscience.org": "rss",
-  "littlefutures.substack.com": "rss",
-  "arbesman.substack.com": "rss",
-  "mattsclancy.substack.com": "rss",
-};
-
-const domainToOptionsMap =
-{
-  "rss.nytimes.com": { includeDescription: true, },
-  "www.theguardian.com": { includeDescription: true, },
-  "hnrss.org": { includeDescription: false, },
-  "lobste.rs": { includeDescription: false, },
-  "greenwald.substack.com": { includeDescription: true, },
-  "subconscious.substack.com": { includeDescription: true, },
-  "noahpinion.substack.com": { includeDescription: true, },
-  "residentcontrarian.substack.com": { includeDescription: true, },
-  "codeforscience.org": { includeDescription: true, },
-  "littlefutures.substack.com": { includeDescription: true, },
-  "arbesman.substack.com": { includeDescription: true, },
-  "mattsclancy.substack.com": { includeDescription: true, },
-}
 
 const getDomain = (url) =>
 {
   const domain = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
   return domain && domain[1];
-}
-
-const getType = (url) =>
-{
-  return domainToTypeMap[getDomain(url)];
 }
 
 const processFeed =
@@ -155,7 +117,7 @@ api.get("/", async (request, response) =>
     .reduce(
       (entries, { url, config: { type, ...options }, data }) =>
         entries.concat(
-          processFeed[getType(url)].extract(data)
+          processFeed[type].extract(data)
             .map((entry) =>
               ({
                 domain: getDomain(url),
