@@ -91,7 +91,6 @@ header h1 {
 }
 
 main {
-    max-width: 55ch;
     justify-self: center;
 
     display: grid;
@@ -99,7 +98,16 @@ main {
     row-gap: 1.5rem;
 }
 
+article {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 1fr;
+    column-gap: 1rem;
+}
+
 article > section {
+    max-width: 55ch;
+
     border: 2px solid;
     border-radius: 8px;
 
