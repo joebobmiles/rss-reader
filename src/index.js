@@ -9,18 +9,18 @@ const sources = require("./sources.json");
 
 const domainToTypeMap =
 {
-  "rss.nytimes.com": "nytimes",
-  "www.theguardian.com": "theguardian",
+  "rss.nytimes.com": "rss",
+  "www.theguardian.com": "rss",
   "hnrss.org": "hackernews",
   "lobste.rs": "lobsters",
-  "greenwald.substack.com": "substack",
-  "subconscious.substack.com": "substack",
-  "noahpinion.substack.com": "substack",
-  "residentcontrarian.substack.com": "substack",
-  "codeforscience.org": "codeforscience",
-  "littlefutures.substack.com": "substack",
-  "arbesman.substack.com": "substack",
-  "mattsclancy.substack.com": "substack",
+  "greenwald.substack.com": "rss",
+  "subconscious.substack.com": "rss",
+  "noahpinion.substack.com": "rss",
+  "residentcontrarian.substack.com": "rss",
+  "codeforscience.org": "rss",
+  "littlefutures.substack.com": "rss",
+  "arbesman.substack.com": "rss",
+  "mattsclancy.substack.com": "rss",
 };
 
 const getDomain = (url) =>
@@ -33,23 +33,6 @@ const getType = (url) =>
 {
   return domainToTypeMap[getDomain(url)];
 }
-
-const substackFeed =
-{
-  extract: ({ rss: { channel: [ { item } ] } }) => item,
-  normalize: ({
-    title: [ title ],
-    link: [ link ],
-    description: [ description ],
-    pubDate: [ date ]
-  }) =>
-    ({
-      title,
-      link,
-      description,
-      date: new Date(date),
-    }),
-};
 
 const processFeed =
 {
@@ -67,7 +50,7 @@ const processFeed =
         date: new Date(published)
       }),
   },
-  "nytimes": {
+  "rss": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
@@ -81,21 +64,6 @@ const processFeed =
         description,
         date: new Date(pubDate)
       })
-  },
-  "theguardian": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      description: [ description ],
-      pubDate: [ date ]
-    }) =>
-      ({
-        title,
-        link,
-        description,
-        date: new Date(date),
-      }),
   },
   "hackernews": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
@@ -122,22 +90,6 @@ const processFeed =
         title,
         link,
         description: null,
-        date: new Date(date),
-      }),
-  },
-  "substack": substackFeed,
-  "codeforscience": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      description: [ description ],
-      pubDate: [ date ]
-    }) =>
-      ({
-        title,
-        link,
-        description,
         date: new Date(date),
       }),
   },
