@@ -116,7 +116,7 @@ article > section {
     box-shadow: 2px 2px var(--black);
 }
 
-article * + * {
+article > section * + * {
     margin-top: 1rem;
 }
 
