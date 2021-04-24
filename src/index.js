@@ -11,8 +11,8 @@ const domainToTypeMap =
 {
   "rss.nytimes.com": "rss",
   "www.theguardian.com": "rss",
-  "hnrss.org": "hackernews",
-  "lobste.rs": "lobsters",
+  "hnrss.org": "rss",
+  "lobste.rs": "rss",
   "greenwald.substack.com": "rss",
   "subconscious.substack.com": "rss",
   "noahpinion.substack.com": "rss",
@@ -22,6 +22,22 @@ const domainToTypeMap =
   "arbesman.substack.com": "rss",
   "mattsclancy.substack.com": "rss",
 };
+
+const domainToOptionsMap =
+{
+  "rss.nytimes.com": { includeDescription: true, },
+  "www.theguardian.com": { includeDescription: true, },
+  "hnrss.org": { includeDescription: false, },
+  "lobste.rs": { includeDescription: false, },
+  "greenwald.substack.com": { includeDescription: true, },
+  "subconscious.substack.com": { includeDescription: true, },
+  "noahpinion.substack.com": { includeDescription: true, },
+  "residentcontrarian.substack.com": { includeDescription: true, },
+  "codeforscience.org": { includeDescription: true, },
+  "littlefutures.substack.com": { includeDescription: true, },
+  "arbesman.substack.com": { includeDescription: true, },
+  "mattsclancy.substack.com": { includeDescription: true, },
+}
 
 const getDomain = (url) =>
 {
@@ -38,11 +54,14 @@ const processFeed =
 {
   "youtube": {
     extract: ({ feed: { entry }}) => entry,
-    normalize: ({
-      title: [ title ],
-      link: [ { $: { href: link } } ],
-      published: [ published ]
-    }) =>
+    normalize: (
+      {
+        title: [ title ],
+        link: [ { $: { href: link } } ],
+        published: [ published ]
+      },
+      options
+    ) =>
       ({
         title,
         link,
@@ -52,46 +71,23 @@ const processFeed =
   },
   "rss": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      description: [ description ],
-      pubDate
-    }) =>
+    normalize: (
+      {
+        title: [ title ],
+        link: [ link ],
+        description: [ description ],
+        pubDate
+      },
+      {
+        includeDescription
+      }
+    ) =>
       ({
         title,
         link,
-        description,
+        description: (includeDescription ? description : null),
         date: new Date(pubDate)
       })
-  },
-  "hackernews": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      pubDate: [ date ]
-    }) =>
-      ({
-        title,
-        link,
-        description: null,
-        date: new Date(date),
-      }),
-  },
-  "lobsters": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
-    normalize: ({
-      title: [ title ],
-      link: [ link ],
-      pubDate: [ date ]
-    }) =>
-      ({
-        title,
-        link,
-        description: null,
-        date: new Date(date),
-      }),
   },
 };
 
@@ -127,7 +123,10 @@ api.get("/", async (request, response) =>
             .map((entry) =>
             ({
               domain: getDomain(url),
-              ...processFeed[getType(url)].normalize(entry)
+              ...processFeed[getType(url)].normalize(
+                entry,
+                domainToOptionsMap[getDomain(url)]
+              )
             })
             )
         ),
