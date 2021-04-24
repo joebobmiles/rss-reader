@@ -7,10 +7,26 @@ const api = express();
 
 const sources = require("./sources.json");
 
+const domainToTypeMap =
+{
+  "rss.nytimes.com": "nytimes",
+  "www.theguardian.com": "theguardian",
+  "hnrss.org": "hackernews",
+  "lobste.rs": "lobsters",
+  "greenwald.substack.com": "substack",
+  "subconscious.substack.com": "substack",
+  "noahpinion.substack.com": "substack",
+  "residentcontrarian.substack.com": "substack",
+  "codeforscience.org": "codeforscience",
+  "littlefutures.substack.com": "substack",
+  "arbesman.substack.com": "substack",
+  "mattsclancy.substack.com": "substack",
+};
+
 const getType = (url) =>
 {
-  const type = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
-  return type && type[1];
+  const domain = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
+  return domainToTypeMap[domain && domain[1]];
 }
 
 const substackFeed =
@@ -32,7 +48,7 @@ const substackFeed =
 
 const processFeed =
 {
-  "www.youtube.com": {
+  "youtube": {
     extract: ({ feed: { entry }}) => entry,
     normalize: ({
       title: [ title ],
@@ -46,7 +62,7 @@ const processFeed =
         date: new Date(published)
       }),
   },
-  "rss.nytimes.com": {
+  "nytimes": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
@@ -61,7 +77,7 @@ const processFeed =
         date: new Date(pubDate)
       })
   },
-  "www.theguardian.com": {
+  "theguardian": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
@@ -76,7 +92,7 @@ const processFeed =
         date: new Date(date),
       }),
   },
-  "hnrss.org": {
+  "hackernews": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
@@ -90,7 +106,7 @@ const processFeed =
         date: new Date(date),
       }),
   },
-  "lobste.rs": {
+  "lobsters": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
@@ -104,14 +120,8 @@ const processFeed =
         date: new Date(date),
       }),
   },
-  "greenwald.substack.com": substackFeed,
-  "subconscious.substack.com": substackFeed,
-  "noahpinion.substack.com": substackFeed,
-  "residentcontrarian.substack.com": substackFeed,
-  "littlefutures.substack.com": substackFeed,
-  "arbesman.substack.com": substackFeed,
-  "mattsclancy.substack.com": substackFeed,
-  "codeforscience.org": {
+  "substack": substackFeed,
+  "codeforscience": {
     extract: ({ rss: { channel: [ { item } ] } }) => item,
     normalize: ({
       title: [ title ],
