@@ -207,7 +207,7 @@ api.get("/", async (request, response) =>
               dateStyle: "short",
               timeStyle: "short"
             })}</time>`+
-            `<p>Via ${domain}</p>`+
+            `<p>Via <a href="https://${domain}">${domain}</a></p>`+
           `</aside>`+
           `<section>`+
             `<h2><a href='${link}'>${title}</a></h2>`+
