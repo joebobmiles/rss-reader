@@ -131,3 +131,9 @@ a:any-link {
 
     color: var(--anchor-fg);
 }
+
+article h2 a:any-link {
+    border: none;
+
+    color: inherit;
+}
