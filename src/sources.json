@@ -85,5 +85,7 @@
   "https://codeforscience.org/feed.xml",
   "https://littlefutures.substack.com/feed",
   "https://arbesman.substack.com/feed",
-  "https://mattsclancy.substack.com/feed"
+  "https://mattsclancy.substack.com/feed",
+  "http://feeds.bbci.co.uk/news/technology/rss.xml",
+  "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml"
 ]
