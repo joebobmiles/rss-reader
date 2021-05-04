@@ -88,5 +88,14 @@
   "https://mattsclancy.substack.com/feed",
   "http://feeds.bbci.co.uk/news/technology/rss.xml",
   "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-  "https://dev.to/rss"
+  {
+    "url": "https://dev.to/rss",
+    "categories": [
+      "javascript",
+      "typescript",
+      "webdev",
+      "react",
+      "npm"
+    ]
+  }
 ]
