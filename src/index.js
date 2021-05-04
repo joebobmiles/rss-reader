@@ -39,7 +39,8 @@ const processFeed =
         title: [ title ],
         link: [ link ],
         description: [ description ],
-        pubDate
+        pubDate,
+        category: categories
       },
       {
         includeDescription
@@ -49,7 +50,8 @@ const processFeed =
         title,
         link,
         description: (includeDescription ? description : null),
-        date: new Date(pubDate)
+        date: new Date(pubDate),
+        categories
       })
   },
 };
@@ -123,6 +125,14 @@ api.get("/", async (request, response) =>
                 domain: getDomain(url),
                 ...processFeed[type].normalize(entry, options)
               })
+            )
+            .filter(
+              ({ categories }) =>
+                options.categories && categories
+                ? categories.some(
+                  (category) => options.categories.includes(category)
+                )
+                : true
             )
         ),
       []
