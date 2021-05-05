@@ -67,16 +67,12 @@ const processFeed =
         includeDescription
       }
     ) =>
-    {
-      console.log(title, description)
-
-      return ({
+      ({
         title,
         link,
         description: (includeDescription ? description : null),
         date: new Date(updated)
       })
-    }
   }
 };
 
