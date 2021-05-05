@@ -98,5 +98,9 @@
       "react",
       "npm"
     ]
+  },
+  {
+    "url": "https://www.theregister.com/software/applications/headlines.atom",
+    "type": "atom"
   }
 ]
