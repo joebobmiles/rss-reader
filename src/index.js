@@ -54,6 +54,30 @@ const processFeed =
         categories
       })
   },
+  "atom": {
+    extract: ({ feed: { entry } }) => entry,
+    normalize: (
+      {
+        title: [ { _: title } ],
+        link: [ { $: { href: link } } ],
+        summary: [ { _: description } ],
+        updated: [ updated ]
+      },
+      {
+        includeDescription
+      }
+    ) =>
+    {
+      console.log(title, description)
+
+      return ({
+        title,
+        link,
+        description: (includeDescription ? description : null),
+        date: new Date(updated)
+      })
+    }
+  }
 };
 
 const fetchDataFrom = (url) =>
@@ -114,7 +138,13 @@ api.get("/", async (request, response) =>
 
   const entries = feeds
     .filter(
-      ({ data }) => data.rss !== undefined
+      ({ data, config: { type } }) =>
+        (
+          {
+            rss: data.rss !== undefined,
+            atom: data.feed !== undefined,
+          }[type]
+        )
     )
     .reduce(
       (entries, { url, config: { type, ...options }, data }) =>
