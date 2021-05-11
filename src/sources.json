@@ -107,5 +107,6 @@
     "url": "https://www.theregister.com/security/headlines.atom",
     "type": "atom"
   },
-  "https://antonhowes.substack.com/feed"
+  "https://antonhowes.substack.com/feed",
+  "https://www.justuseemail.com/feed/"
 ]
