@@ -110,5 +110,8 @@
   "https://www.justuseemail.com/feed/",
   "https://www.bbc.com/future/feed.rss",
   "https://breakingsmart.substack.com/feed",
-  "https://www.eff.org/rss/updates.xml"
+  {
+    "url": "https://www.eff.org/rss/updates.xml",
+    "includeDescription": false
+  }
 ]
