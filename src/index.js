@@ -79,7 +79,13 @@ const processFeed =
 const fetchDataFrom = (url) =>
   fetch(url)
     .then((response) => response.text())
-    .then((text) => new xml2js.Parser().parseStringPromise(text));
+    .then((text) =>
+      new xml2js.Parser().parseStringPromise(text))
+    .catch(() =>
+    {
+      console.error(`Could not load: ${url}`);
+      return {};
+    });
 
 const defaultOptions =
 {
