@@ -113,5 +113,6 @@
   {
     "url": "https://www.eff.org/rss/updates.xml",
     "includeDescription": false
-  }
+  },
+  "https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=30"
 ]
