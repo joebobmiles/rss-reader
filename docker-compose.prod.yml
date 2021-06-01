@@ -5,6 +5,7 @@ services:
             context: ./
             dockerfile: docker/web/prod/Dockerfile
         image: hullabaloo/backend
+        restart: always
         environment:
             PORT: 33287
         ports:
