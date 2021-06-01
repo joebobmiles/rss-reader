@@ -1,6 +1,6 @@
 version: '3'
 services:
-    web:
+    backend:
         build:
             context: ./
             dockerfile: docker/web/prod/Dockerfile

@@ -1,6 +1,6 @@
 version: '3'
 services:
-    web:
+    backend:
         build: docker/web/dev
         environment:
             PORT: 33287
