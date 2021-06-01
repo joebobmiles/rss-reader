@@ -4,6 +4,7 @@ services:
         build:
             context: ./
             dockerfile: docker/web/prod/Dockerfile
+        image: hullabaloo/backend
         environment:
             PORT: 33287
         ports:
