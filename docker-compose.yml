@@ -1,0 +1,10 @@
+version: '3'
+services:
+    backend:
+        build: docker/web/dev
+        environment:
+            PORT: 33287
+        ports:
+            - "80:33287"
+        volumes:
+            - .:/srv/hullabaloo
