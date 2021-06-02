@@ -1,9 +1,6 @@
 services:
     backend:
         image: hullabaloo/backend
-        build:
-            context: ./
-            dockerfile: docker/backend/prod/Dockerfile
         restart: unless-stopped
         env_file: ".env"
         ports:
