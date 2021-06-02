@@ -1,0 +1,9 @@
+services:
+    backend:
+        build:
+            dockerfile: docker/web/dev/Dockerfile
+        restart: "no"
+        ports:
+            - "80:33287"
+        volumes:
+            - .:/srv/hullabaloo

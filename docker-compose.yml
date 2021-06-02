@@ -1,10 +1,11 @@
-version: '3'
 services:
     backend:
-        build: docker/web/dev
+        build:
+            context: ./
+            dockerfile: docker/web/prod/Dockerfile
+        image: hullabaloo/backend
+        restart: always
         environment:
             PORT: 33287
         ports:
-            - "80:33287"
-        volumes:
-            - .:/srv/hullabaloo
+            - "33287:33287"
