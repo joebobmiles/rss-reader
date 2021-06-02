@@ -2,7 +2,7 @@ services:
     backend:
         build:
             context: ./
-            dockerfile: docker/web/prod/Dockerfile
+            dockerfile: docker/backend/prod/Dockerfile
         image: hullabaloo/backend
         restart: always
         environment:
