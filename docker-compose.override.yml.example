@@ -1,9 +1,9 @@
 services:
     backend:
         build:
-            dockerfile: docker/backend/dev/Dockerfile
+            context: ./
+            dockerfile: docker/backend/Dockerfile
         restart: "no"
-        ports:
-            - "80:33287"
         volumes:
             - .:/srv/hullabaloo
+        entrypoint: npm run develop
