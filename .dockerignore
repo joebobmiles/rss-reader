@@ -3,3 +3,5 @@ node_modules/
 .github/
 LICENSE
 README.md
+docker-compose.*
+.dockerignore
