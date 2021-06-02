@@ -1,11 +1,10 @@
 services:
     backend:
+        image: hullabaloo/backend
         build:
             context: ./
             dockerfile: docker/backend/prod/Dockerfile
-        image: hullabaloo/backend
         restart: always
-        environment:
-            PORT: 33287
+        env_file: ".env"
         ports:
-            - "33287:33287"
+            - "127.0.0.1:${DOCKER_BACKEND_HOST_PORT:-33287}:${PORT:-33287}"
