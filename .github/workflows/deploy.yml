@@ -38,4 +38,5 @@ jobs:
           git fetch
           git reset --hard origin/master
           npm ci
+          cp .env.example .env
           END
