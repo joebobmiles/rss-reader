@@ -117,5 +117,9 @@
   {
     "url": "https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=30",
     "includeDescription": false
+  },
+  {
+    "url": "https://thereboot.com/feed/",
+    "includeDescription": false
   }
 ]
