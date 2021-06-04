@@ -1,12 +1,12 @@
-name: Deploy & Release
+name: Build & Push Container
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  deploy:
-    name: "Deploy to production"
+  build-container:
+    name: "Build and push container"
     runs-on: ubuntu-latest
 
     steps:
@@ -14,29 +14,11 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/deploy.key
-          chmod 600 ~/.ssh/deploy.key
-          cat >> ~/.ssh/config <<END
-          Host production
-            HostName $SSH_HOST
-            USER $SSH_USER
-            IdentityFile ~/.ssh/deploy.key
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
-          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+      - name: Copy override file
+        run: cp docker-compose.override.yml.example docker-compose.override.yml
 
-      - name: Deploy
-        run: |
-          ssh production <<END
-          cd ./hullabaloo
-          git fetch
-          git reset --hard origin/master
-          npm ci
-          cp .env.example .env
-          END
+      - name: Build container
+        run: docker-compose build backend
+
+      - name: Push container
+        run: docker-compose push backend
