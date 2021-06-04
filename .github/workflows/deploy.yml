@@ -23,5 +23,11 @@ jobs:
       - name: Build container
         run: docker-compose build backend
 
+      - name: Login into Docker
+        run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_USER} --password-stdin
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
       - name: Push container
         run: docker-compose push backend
