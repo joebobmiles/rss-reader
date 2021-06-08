@@ -222,6 +222,7 @@ api.get("/", async (request, response) =>
   );
 });
 
-api.listen(process.env.PORT || 8080, () => {
-  console.info("Running...");
+const PORT = process.env.PORT || 8080;
+api.listen(PORT, () => {
+  console.info(`Running on port ${PORT}`);
 });
