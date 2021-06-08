@@ -121,5 +121,9 @@
   {
     "url": "https://thereboot.com/feed/",
     "includeDescription": false
+  },
+  {
+    "url": "http://www.aaronsw.com/2002/feeds/pgessays.rss",
+    "includeDescription": false
   }
 ]
