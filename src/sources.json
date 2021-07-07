@@ -127,5 +127,9 @@
   "https://www.wired.com/feed/category/security/latest/rss",
   "https://www.wired.com/feed/category/backchannel/latest/rss",
   "https://www.persuasion.community/feed.xml",
-  "https://www.readthegeneralist.com/briefing/rss.xml"
+  "https://www.readthegeneralist.com/briefing/rss.xml",
+  {
+    "url": "https://blog.feenk.com/atom.xml",
+    "type": "atom",
+  }
 ]
