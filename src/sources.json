@@ -130,6 +130,6 @@
   "https://www.readthegeneralist.com/briefing/rss.xml",
   {
     "url": "https://blog.feenk.com/atom.xml",
-    "type": "atom",
+    "type": "atom"
   }
 ]
