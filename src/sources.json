@@ -79,8 +79,6 @@
     "includeDescription": false
   },
   "https://subconscious.substack.com/feed",
-  "https://noahpinion.substack.com/feed",
-  "https://residentcontrarian.substack.com/feed",
   "https://codeforscience.org/feed.xml",
   "https://littlefutures.substack.com/feed",
   "https://arbesman.substack.com/feed",
@@ -126,6 +124,12 @@
   "https://www.wired.com/feed/category/science/latest/rss",
   "https://www.wired.com/feed/category/security/latest/rss",
   "https://www.wired.com/feed/category/backchannel/latest/rss",
+  "https://www.persuasion.community/feed.xml",
+  "https://www.readthegeneralist.com/briefing/rss.xml",
+  {
+    "url": "https://blog.feenk.com/atom.xml",
+    "type": "atom"
+  },
   {
     "url": "https://fantasticanachronism.com/atom.xml",
     "type": "atom"
