@@ -134,5 +134,6 @@
     "url": "https://fantasticanachronism.com/atom.xml",
     "type": "atom"
   },
-  "https://themarkup.org/feeds/rss.xml"
+  "https://themarkup.org/feeds/rss.xml",
+  "https://simonsarris.substack.com/feed"
 ]
