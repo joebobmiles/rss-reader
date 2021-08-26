@@ -135,5 +135,6 @@
     "type": "atom"
   },
   "https://themarkup.org/feeds/rss.xml",
-  "https://simonsarris.substack.com/feed"
+  "https://simonsarris.substack.com/feed",
+  "https://blog.ncase.me/rss/"
 ]
