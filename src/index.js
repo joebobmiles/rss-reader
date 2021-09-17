@@ -58,7 +58,7 @@ const processFeed =
     extract: ({ feed: { entry } }) => entry,
     normalize: (
       {
-        title: [ { _: title } ],
+        title: [ title ],
         link: [ { $: { href: link } } ],
         summary: [ { _: description } ],
         updated: [ updated ]
@@ -68,7 +68,7 @@ const processFeed =
       }
     ) =>
       ({
-        title,
+        title: title instanceof Object ? title['_'] : title,
         link,
         description: (includeDescription ? description : null),
         date: new Date(updated)
