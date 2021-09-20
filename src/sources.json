@@ -81,21 +81,8 @@
   "https://subconscious.substack.com/feed",
   "https://codeforscience.org/feed.xml",
   "https://littlefutures.substack.com/feed",
-  "https://arbesman.substack.com/feed",
-  "https://mattsclancy.substack.com/feed",
   "http://feeds.bbci.co.uk/news/technology/rss.xml",
   "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-  {
-    "url": "https://dev.to/rss",
-    "includeDescription": false,
-    "categories": [
-      "javascript",
-      "typescript",
-      "webdev",
-      "react",
-      "npm"
-    ]
-  },
   {
     "url": "https://www.theregister.com/software/applications/headlines.atom",
     "type": "atom"
@@ -104,10 +91,8 @@
     "url": "https://www.theregister.com/security/headlines.atom",
     "type": "atom"
   },
-  "https://antonhowes.substack.com/feed",
   "https://www.justuseemail.com/feed/",
   "https://www.bbc.com/future/feed.rss",
-  "https://breakingsmart.substack.com/feed",
   {
     "url": "https://www.eff.org/rss/updates.xml",
     "includeDescription": false
@@ -126,14 +111,6 @@
   "https://www.wired.com/feed/category/backchannel/latest/rss",
   "https://www.persuasion.community/feed.xml",
   "https://www.readthegeneralist.com/briefing/rss.xml",
-  {
-    "url": "https://blog.feenk.com/atom.xml",
-    "type": "atom"
-  },
-  {
-    "url": "https://fantasticanachronism.com/atom.xml",
-    "type": "atom"
-  },
   "https://themarkup.org/feeds/rss.xml",
   "https://simonsarris.substack.com/feed",
   "https://blog.ncase.me/rss/",
