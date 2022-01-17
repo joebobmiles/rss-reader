@@ -4,8 +4,8 @@
   "description": "A personal RSS reader.",
   "main": "src/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
-    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./src/index.js"
+    "start": "node ./src/backend/index.js",
+    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./src/backend/index.js"
   },
   "repository": {
     "type": "git",
