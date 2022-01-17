@@ -10,6 +10,6 @@ COPY package.json package-lock.json ./
 
 RUN npm clean-install
 
-COPY ./src ./
+COPY ./src/backend ./
 
 ENTRYPOINT [ "node", "index.js" ]
