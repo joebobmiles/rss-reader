@@ -13,4 +13,6 @@ services:
         build:
             context: ./
             dockerfile: docker/frontend/Dockerfile
+        volumes:
+            - ./src/frontend:/usr/share/nginx/html
         restart: "no"
