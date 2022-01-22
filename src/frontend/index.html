@@ -19,5 +19,14 @@
         <main>
         </main>
     </div>
+
+    <script type="text/javascript">
+        const getFeed = async () =>
+        {
+            return await fetch("http://localhost:43115")
+        }
+
+        getFeed().then((r) => console.log(r))
+    </script>
 </body>
 </html>
