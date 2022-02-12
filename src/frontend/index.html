@@ -26,7 +26,7 @@
             return await fetch("http://localhost:43115")
         }
 
-        getFeed().then((r) => r.text().then((t) => console.log(t)))
+        getFeed().then((r) => r.json().then((j) => console.log(j)))
     </script>
 </body>
 </html>
