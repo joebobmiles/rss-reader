@@ -22,11 +22,23 @@
 
     <script type="text/javascript">
         const getFeed = async () =>
-        {
-            return await fetch("http://localhost:43115")
-        }
+            fetch("http://localhost:43115").then((r) => r.json());
 
-        getFeed().then((r) => r.json().then((j) => console.log(j)))
+        const main = async () => {
+            const feed = await getFeed().then((feed) => feed);
+
+            console.log(feed);
+
+            const $main = document.getElementsByTagName("main")[0];
+            feed.forEach((entry) => {
+                const $test = document.createElement("p");
+                $test.innerText = entry.title;
+
+                $main.appendChild($test);
+            });
+        };
+
+        main();
     </script>
 </body>
 </html>
