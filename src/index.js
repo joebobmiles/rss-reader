@@ -38,9 +38,9 @@ const processFeed =
       {
         title: [ title ],
         link: [ link ],
-        description: [ description ],
+        description: [ description ] = [ null ],
         pubDate,
-        category: categories
+        category: categories = []
       },
       {
         includeDescription
@@ -141,6 +141,7 @@ api.get("/", async (request, response) =>
   const entries = feeds
     .filter(
       ({ data, config: { type } }) =>
+        data != null &&
         (
           {
             rss: data.rss !== undefined,
