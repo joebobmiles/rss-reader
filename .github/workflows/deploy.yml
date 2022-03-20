@@ -14,6 +14,12 @@ jobs:
         with:
           fetch-depth: 1
 
+      - uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "http://localhost:\d+"
+          replace: "http://feed.jrm.dev/api"
+          include: "index.html"
+
       - name: Copy environment file
         run: cp .env.example .env
 
