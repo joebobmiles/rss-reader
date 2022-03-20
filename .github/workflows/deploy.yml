@@ -20,8 +20,8 @@ jobs:
       - name: Copy override file
         run: cp docker-compose.override.yml.example docker-compose.override.yml
 
-      - name: Build container
-        run: docker-compose build backend
+      - name: Build containers
+        run: docker-compose build
 
       - name: Login into Docker
         run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_USER} --password-stdin
@@ -29,5 +29,5 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Push container
-        run: docker-compose push backend
+      - name: Push containers
+        run: docker-compose push

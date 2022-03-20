@@ -9,3 +9,11 @@ services:
         ports:
             - 9229:9229
         entrypoint: npm run develop
+    frontend:
+        build:
+            context: ./
+            dockerfile: docker/frontend/Dockerfile
+        volumes:
+            - ./docker/frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./src/frontend:/usr/share/nginx/html:ro
+        restart: "no"

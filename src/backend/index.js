@@ -186,41 +186,7 @@ api.get("/", async (request, response) =>
         date2.valueOf() - date1.valueOf()
     );
 
-  const html = entries
-    .reduce(
-      (html, { title, link, description, date, domain }) =>
-        html +
-        `<article>`+
-          `<aside>`+
-            `<time datetime='${date.toISOString()}'>${date.toLocaleString("en-US", {
-              dateStyle: "short",
-              timeStyle: "short"
-            })}</time>`+
-            `<p>Via <a href="https://${domain}">${domain}</a></p>`+
-          `</aside>`+
-          `<section>`+
-            `<h2><a href='${link}'>${title}</a></h2>`+
-            (description ? `<p>${description}</p>` : "")+
-          `</section>`+
-        `</article>`,
-      ""
-    );
-
-  response.send(
-    `<html>`+
-      `<head>`+
-        `<link rel="stylesheet" type="text/css" href="static/css/reset.css">`+
-        `<link rel="stylesheet" type="text/css" href="static/css/style.css">`+
-        `<title>Hullabaloo</title>`+
-      `</head>`+
-      `<body>`+
-        `<div id="site-container">`+
-          `<header><h1>Hullabaloo</h1></header>`+
-          `<main>${html}</main>`+
-        `</div>`+
-      `</body>`+
-    `</html>`
-  );
+  response.json(entries)
 });
 
 const PORT = process.env.PORT || 8080;
