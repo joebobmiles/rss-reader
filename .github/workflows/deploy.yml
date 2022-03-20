@@ -17,8 +17,8 @@ jobs:
       - uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "http://localhost(:[0-9]+)?"
-          replace: "http://feed.jrm.dev/api"
-          include: "index.html"
+          replace: "https://feed.jrm.dev/api"
+          include: "**index.html"
 
       - name: Copy environment file
         run: cp .env.example .env
