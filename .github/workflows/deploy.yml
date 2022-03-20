@@ -22,7 +22,7 @@ jobs:
           include: "**index.html"
 
       - run: |
-        if [[ ${{ steps.find-replace.outputs.modifiedFiles }} != 0 ]]; then exit 0; else exit 1; fi
+          if [[ ${{ steps.find-replace.outputs.modifiedFiles }} != 0 ]]; then exit 0; else exit 1; fi
 
       - name: Copy environment file
         run: cp .env.example .env
