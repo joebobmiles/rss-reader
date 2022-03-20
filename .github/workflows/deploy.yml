@@ -16,7 +16,7 @@ jobs:
 
       - uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "http://localhost:\d+"
+          find: "http://localhost(:[0-9]+)?"
           replace: "http://feed.jrm.dev/api"
           include: "index.html"
 
