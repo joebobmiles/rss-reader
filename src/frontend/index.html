@@ -27,8 +27,6 @@
         const main = async () => {
             const feed = await getFeed().then((feed) => feed);
 
-            console.log(feed);
-
             const $main = document.getElementsByTagName("main")[0];
             feed.forEach((entry) => {
                 const $article = document.createElement("article");
