@@ -117,5 +117,11 @@
   "https://hyperlink.academy/rss.xml",
   "https://100r.co/links/rss.xml",
   "https://tales.wgp.org/feed/rss",
-  "https://baronderopp.substack.com/feed"
+  "https://baronderopp.substack.com/feed",
+  "https://thebardicinquiry.com/feed/",
+  "https://thealexandrian.net/feed",
+  {
+    "url": "https://orbitalcrypt.blogspot.com/feeds/posts/default",
+    "type": "atom"
+  }
 ]
