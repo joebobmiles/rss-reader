@@ -123,5 +123,9 @@
   {
     "url": "https://orbitalcrypt.blogspot.com/feeds/posts/default",
     "type": "atom"
+  },
+  {
+    "url": "https://thecosmicorrery.blogspot.com/feeds/posts/default",
+    "type": "atom"
   }
 ]
