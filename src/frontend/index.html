@@ -36,7 +36,7 @@
 
                 $publishTime.setAttribute("datetime", entry.date);
                 $publishTime.innerText = new Date(entry.date).toLocaleString(
-                    "en-US",
+                    undefined,
                     {
                         dateStyle: "short",
                         timeStyle: "short"
