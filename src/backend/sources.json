@@ -127,5 +127,9 @@
   {
     "url": "https://thecosmicorrery.blogspot.com/feeds/posts/default",
     "type": "atom"
+  },
+  {
+    "url": "https://heredragonsabound.blogspot.com/feeds/posts/default",
+    "type": "atom"
   }
 ]
