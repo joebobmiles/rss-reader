@@ -59,20 +59,19 @@ const processFeed =
     normalize: (
       {
         title: [ title ],
-        link: [ { $: { href: link } } ],
-        summary: [ { _: description } ],
+        link,
+        summary,
         updated: [ updated ]
       },
       {
         includeDescription
       }
-    ) =>
-      ({
-        title: title instanceof Object ? title['_'] : title,
-        link,
-        description: (includeDescription ? description : null),
-        date: new Date(updated)
-      })
+    ) => ({
+      title: title instanceof Object ? title['_'] : title,
+      link: link[0]['$'].href,
+      description: (includeDescription && summary > 0 ? summary[0]['_'] : null),
+      date: new Date(updated)
+    })
   }
 };
 
@@ -153,8 +152,7 @@ api.get("/", async (request, response) =>
       (entries, { url, config: { type, ...options }, data }) =>
         entries.concat(
           processFeed[type].extract(data)
-            .map((entry) =>
-              ({
+            .map((entry) => ({
                 domain: getDomain(url),
                 ...processFeed[type].normalize(entry, options)
               })

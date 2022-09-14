@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joebobmiles/rss-reader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joebobmiles/rss-reader/issues"
+  },
+  "homepage": "https://github.com/joebobmiles/rss-reader#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

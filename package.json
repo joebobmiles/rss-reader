@@ -1,12 +1,9 @@
 {
-  "name": "rss-reader",
+  "name": "hullabaloo",
+  "private": true,
   "version": "0.0.0",
   "description": "A personal RSS reader.",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node ./src/backend/index.js",
-    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./src/backend/index.js"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joebobmiles/rss-reader.git"
@@ -18,12 +15,7 @@
     "url": "https://github.com/joebobmiles/rss-reader/issues"
   },
   "homepage": "https://github.com/joebobmiles/rss-reader#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "xml2js": "^0.4.23"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }
