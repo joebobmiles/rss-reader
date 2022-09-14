@@ -1,19 +1,18 @@
 services:
     backend:
         build:
-            context: ./
-            dockerfile: docker/backend/Dockerfile
+            context: ./packages/backend
         restart: "no"
         volumes:
-            - .:/srv/hullabaloo
+            - ./packages/backend:/srv/hullabaloo
+            - ./node_modules:/srv/hullabaloo/node_modules
         ports:
             - 9229:9229
         entrypoint: npm run develop
+
     frontend:
         build:
-            context: ./
-            dockerfile: docker/frontend/Dockerfile
+            context: ./packages/frontend
         volumes:
-            - ./docker/frontend/nginx.conf:/etc/nginx/nginx.conf:ro
-            - ./src/frontend:/usr/share/nginx/html:ro
+            - ./packages/frontend:/usr/share/nginx/html
         restart: "no"
