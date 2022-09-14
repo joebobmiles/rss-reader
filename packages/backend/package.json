@@ -2,10 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
-    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./src/index.js"
+    "start": "node ./dist/index.js",
+    "develop": "nodemon -L --inspect=0.0.0.0:9229 ./dist/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,10 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.7.18",
+    "@types/node-fetch": "^2.6.2",
+    "@types/xml2js": "^0.4.11",
     "nodemon": "^2.0.19"
   }
 }

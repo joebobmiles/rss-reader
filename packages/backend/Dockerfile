@@ -10,6 +10,6 @@ COPY package.json ./
 
 RUN npm install
 
-COPY ./src ./src
+COPY ./dist ./dist
 
 ENTRYPOINT [ "npm", "start" ]

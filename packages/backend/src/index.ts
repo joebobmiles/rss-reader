@@ -1,13 +1,13 @@
-const path = require("path");
-const express = require("express");
-const xml2js = require("xml2js");
-const fetch = require("node-fetch");
+import path from 'path';
+import express from 'express';
+import xml2js from 'xml2js';
+import fetch from 'node-fetch';
 
 const api = express();
 
 const sources = require("./sources.json");
 
-const getDomain = (url) =>
+const getDomain = (url: string) =>
 {
   const domain = url.match(/^https?:\/\/(.+\.[a-z]+)\//);
   return domain && domain[1];
@@ -16,14 +16,14 @@ const getDomain = (url) =>
 const processFeed =
 {
   "youtube": {
-    extract: ({ feed: { entry }}) => entry,
+    extract: ({ feed: { entry }}: any) => entry,
     normalize: (
       {
         title: [ title ],
         link: [ { $: { href: link } } ],
         published: [ published ]
-      },
-      options
+      }: any,
+      options: any
     ) =>
       ({
         title,
@@ -33,7 +33,7 @@ const processFeed =
       }),
   },
   "rss": {
-    extract: ({ rss: { channel: [ { item } ] } }) => item,
+    extract: ({ rss: { channel: [ { item } ] } }: any) => item,
     normalize: (
       {
         title: [ title ],
@@ -41,10 +41,10 @@ const processFeed =
         description: [ description ] = [ null ],
         pubDate,
         category: categories = []
-      },
+      }: any,
       {
         includeDescription
-      }
+      }: any
     ) =>
       ({
         title,
@@ -55,17 +55,17 @@ const processFeed =
       })
   },
   "atom": {
-    extract: ({ feed: { entry } }) => entry,
+    extract: ({ feed: { entry } }: any) => entry,
     normalize: (
       {
         title: [ title ],
         link,
         summary,
         updated: [ updated ]
-      },
+      }: any,
       {
         includeDescription
-      }
+      }: any
     ) => ({
       title: title instanceof Object ? title['_'] : title,
       link: link[0]['$'].href,
@@ -75,7 +75,7 @@ const processFeed =
   }
 };
 
-const fetchDataFrom = (url) =>
+const fetchDataFrom = (url: string) =>
   fetch(url)
     .then((response) => response.text())
     .then((text) =>
@@ -92,7 +92,7 @@ const defaultOptions =
   includeDescription: true,
 };
 
-const parseUrlOrConfig = (urlOrConfig) =>
+const parseUrlOrConfig = (urlOrConfig: string | any) =>
   ({
     ...defaultOptions,
     ...(
@@ -106,11 +106,11 @@ const parseUrlOrConfig = (urlOrConfig) =>
     )
   });
 
-const retrieveFeedsFrom = (sources) =>
+const retrieveFeedsFrom = (sources: any) =>
   Promise.all(
     sources
     .reduce(
-      (feeds, urlOrConfig) =>
+      (feeds: any, urlOrConfig: any) =>
       {
         const {
           url,
@@ -135,33 +135,33 @@ api.use("/static", express.static(path.join(__dirname, "static")));
 
 api.get("/", async (request, response) =>
 {
-  const feeds = (await retrieveFeedsFrom(sources));
+  const feeds: any = (await retrieveFeedsFrom(sources));
 
-  const entries = feeds
+  const entries: any = feeds
     .filter(
-      ({ data, config: { type } }) =>
+      ({ data, config: { type } }: any) =>
         data != null &&
         (
           {
             rss: data.rss !== undefined,
             atom: data.feed !== undefined,
-          }[type]
+          }[type as string]
         )
     )
     .reduce(
-      (entries, { url, config: { type, ...options }, data }) =>
+      (entries: any, { url, config: { type, ...options }, data }: any) =>
         entries.concat(
-          processFeed[type].extract(data)
-            .map((entry) => ({
+          processFeed[type as 'youtube' | 'rss' | 'atom'].extract(data)
+            .map((entry: any) => ({
                 domain: getDomain(url),
-                ...processFeed[type].normalize(entry, options)
+                ...processFeed[type as 'youtube' | 'rss' | 'atom'].normalize(entry, options)
               })
             )
             .filter(
-              ({ categories }) =>
+              ({ categories }: any) =>
                 options.categories && categories
                 ? categories.some(
-                  (category) => options.categories.includes(category)
+                  (category: any) => options.categories.includes(category)
                 )
                 : true
             )
@@ -169,18 +169,18 @@ api.get("/", async (request, response) =>
       []
     )
     .reduce(
-      (entries, entry) =>
-        entries.some(({ link }) => link === entry.link) === false
+      (entries: any, entry: any) =>
+        entries.some(({ link }: any) => link === entry.link) === false
         ? entries.concat(entry)
         : entries,
       []
     )
     .filter(
-      ({ date }) =>
+      ({ date }: any) =>
         ((Date.now() - date) / (1000 * 60 * 60)) <= 24
     )
     .sort(
-      ({ date: date1 }, { date: date2 }) =>
+      ({ date: date1 }: any, { date: date2 }: any) =>
         date2.valueOf() - date1.valueOf()
     );
 

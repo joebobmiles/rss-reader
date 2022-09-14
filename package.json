@@ -17,5 +17,8 @@
   "homepage": "https://github.com/joebobmiles/rss-reader#readme",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
 }
