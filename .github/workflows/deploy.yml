@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 1
 
       - run: |
-          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' src/frontend/index.html
+          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/index.html
 
       - name: Copy environment file
         run: cp .env.example .env
