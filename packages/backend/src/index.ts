@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 const api = express();
 
-const sources = require("./sources.json");
+import sources from './sources.json';
 
 const getDomain = (url: string) =>
 {

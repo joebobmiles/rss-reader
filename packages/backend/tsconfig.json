@@ -6,6 +6,7 @@
     "tsBuildInfoFile": "./dist/.tsbuildinfo",
 
     "noUnusedParameters": false,
+    "resolveJsonModule": true
   },
   "exclude": [
     "./dist/*",
