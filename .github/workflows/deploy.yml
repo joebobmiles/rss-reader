@@ -10,9 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout recent
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - run: |
+          pushd packages/backend
+          npm run build
+          popd
 
       - run: |
           sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/index.html
