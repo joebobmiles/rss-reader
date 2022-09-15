@@ -20,12 +20,17 @@ jobs:
         with:
           node-version: '16.x'
 
-      - run: |
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build backend
+        run: |
           pushd packages/backend
           npm run build
           popd
 
-      - run: |
+      - name: Change API address in frontend
+        run: |
           sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/index.html
 
       - name: Copy environment file
