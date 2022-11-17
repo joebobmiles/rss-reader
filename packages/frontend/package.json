@@ -7,7 +7,7 @@
     "vite": "^3.1.0"
   },
   "scripts": {
-    "develop": "vite . --port 30000"
+    "develop": "vite . --port 30000 --host"
   },
   "repository": {
     "type": "git",

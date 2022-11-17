@@ -5,3 +5,5 @@ ENV PORT=${PORT}
 EXPOSE ${PORT}
 
 WORKDIR /srv/hullabaloo
+
+ENTRYPOINT [ "npm", "run", "develop" ]
