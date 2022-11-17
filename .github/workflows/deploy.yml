@@ -20,9 +20,6 @@ jobs:
       - name: Copy environment file
         run: cp .env.example .env
 
-      - name: Copy override file
-        run: cp docker-compose.override.yml.example docker-compose.override.yml
-
       - name: Build containers
         run: docker-compose build
 

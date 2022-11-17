@@ -1,13 +1,24 @@
 services:
     backend:
         image: hullabaloo/backend
+        build:
+            context: ./package/backend
+            dockerfile: ./docker/prod.Dockerfile
+
         restart: unless-stopped
+
         env_file: ".env"
         ports:
             - "127.0.0.1:${DOCKER_BACKEND_HOST_PORT:-33287}:${PORT:-30000}"
+
     frontend:
         image: hullabaloo/frontend
+        build:
+            context: ./package/frontend
+            dockerfile: ./docker/prod.Dockerfile
+
         restart: unless-stopped
+
         env_file: ".env"
         ports:
             - "127.0.0.1:${DOCKER_FRONTEND_HOST_PORT:-33286}:80"
