@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "vite": "^3.1.0"
   },
   "scripts": {
@@ -19,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/joebobmiles/rss-reader/issues"
   },
-  "homepage": "https://github.com/joebobmiles/rss-reader#readme"
+  "homepage": "https://github.com/joebobmiles/rss-reader#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
