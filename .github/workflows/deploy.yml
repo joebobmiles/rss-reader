@@ -5,8 +5,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build-container:
-    name: "Build and push container"
+  build-containers:
+    name: "Build and push containers"
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +15,21 @@ jobs:
           fetch-depth: 1
 
       - run: |
-          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/index.html
+          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/src/index.tsx
+
+      - name: Compile frontend
+        run: |
+          pushd packages/frontend
+          npm ci
+          npm run build
+          popd
+
+      - name: Compile backend
+        run: |
+          pushd packages/backend
+          npm ci
+          npm run build
+          popd
 
       - name: Copy environment file
         run: cp .env.example .env
