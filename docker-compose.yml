@@ -1,6 +1,6 @@
 services:
     frontend:
-        image: hullabaloo/frontend
+        image: ghcr.io/joebobmiles/hullabaloo-frontend
         build:
             context: ./packages/frontend
             dockerfile: ./docker/prod.Dockerfile
@@ -12,7 +12,7 @@ services:
             - "${DOCKER_FRONTEND_HOST_PORT}:${DOCKER_FRONTEND_CLIENT_PORT}"
 
     backend:
-        image: hullabaloo/backend
+        image: ghcr.io/joebobmiles/hullabaloo-frontend
         build:
             context: ./packages/backend
             dockerfile: ./docker/prod.Dockerfile

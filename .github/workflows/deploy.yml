@@ -48,11 +48,8 @@ jobs:
       - name: Build containers
         run: docker-compose build
 
-      - name: Login into Docker
-        run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_USER} --password-stdin
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      - name: Login into GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ secrets.USER }} --password-stdin
 
       - name: Push containers
         run: docker-compose push
