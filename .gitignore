@@ -106,4 +106,3 @@ dist
 .vscode/
 
 docker-compose.override.yml
-.next/
