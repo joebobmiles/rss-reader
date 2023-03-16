@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { createRoot } from 'react-dom/client'
 
 const getFeed = async () =>
   await fetch('http://localhost:43115').then(async (r) => await r.json())
@@ -58,5 +57,4 @@ const App = () => {
   )
 }
 
-const root = createRoot(document.getElementById('react-root') as Element)
-root.render(<App />)
+export default App

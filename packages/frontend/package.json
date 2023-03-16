@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@types/node": "^18.15.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "vite": "^3.1.0"
+    "next": "^13.2.4",
+    "typescript": "^5.0.2"
   },
   "scripts": {
-    "develop": "vite . --port 30000 --host",
-    "build": "vite build ."
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build"
   },
   "repository": {
     "type": "git",

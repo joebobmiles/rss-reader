@@ -5,4 +5,4 @@ WORKDIR /srv/hullabaloo
 COPY package.json ./
 RUN npm install
 
-ENTRYPOINT [ "npm", "run", "develop" ]
+ENTRYPOINT [ "npm", "run", "dev" ]
