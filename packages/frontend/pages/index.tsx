@@ -16,7 +16,7 @@ const App = () => {
   return (
     <>
       <header>
-        <h1>Hullabaloo</h1>
+        <h1>Hullabaloo <small>v0.0.1</small></h1>
       </header>
 
       <main>
