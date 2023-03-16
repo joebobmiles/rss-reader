@@ -17,7 +17,7 @@ jobs:
 
       - name: Change API address in frontend
         run: |
-          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/src/index.tsx
+          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/pages/index.tsx
           
       - name: Setup Node
         uses: actions/setup-node@v2
