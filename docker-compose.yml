@@ -11,6 +11,9 @@ services:
         ports:
             - "${DOCKER_FRONTEND_HOST_PORT}:${DOCKER_FRONTEND_CLIENT_PORT}"
 
+        depends_on:
+            - backend
+
     backend:
         image: ghcr.io/joebobmiles/hullabaloo-backend
         build:
@@ -22,5 +25,18 @@ services:
         restart: unless-stopped
 
         env_file: .env
+        environment:
+            - DB_CONNECTION_STRING=mongodb://${DOCKER_DB_ROOT_USERNAME}:${DOCKER_DB_ROOT_PASSWORD}@db
         ports:
             - "${DOCKER_BACKEND_HOST_PORT}:${DOCKER_BACKEND_CLIENT_PORT}"
+
+        depends_on:
+            - db
+
+    db:
+        image: mongo:6.0
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${DOCKER_DB_ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${DOCKER_DB_ROOT_PASSWORD}

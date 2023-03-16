@@ -1,9 +1,6 @@
-import path from 'path'
 import express from 'express'
 import xml2js from 'xml2js'
 import fetch from 'node-fetch'
-
-import sources from './sources.json'
 
 const api = express()
 
@@ -75,10 +72,10 @@ const processFeed =
 }
 
 const fetchDataFrom = async (url: string) =>
-  fetch(url)
-    .then(async (response) => response.text())
+  await fetch(url)
+    .then(async (response) => await response.text())
     .then(async (text) =>
-      new xml2js.Parser().parseStringPromise(text))
+      await new xml2js.Parser().parseStringPromise(text))
     .catch(() => {
       console.error(`Could not load: ${url}`)
       return {}
@@ -105,7 +102,7 @@ const parseUrlOrConfig = (urlOrConfig: string | any) =>
   })
 
 const retrieveFeedsFrom = async (sources: any) =>
-  Promise.all(
+  await Promise.all(
     sources
       .reduce(
         (feeds: any, urlOrConfig: any) => {
@@ -114,7 +111,7 @@ const retrieveFeedsFrom = async (sources: any) =>
             ...config
           } = parseUrlOrConfig(urlOrConfig)
 
-        return feeds.concat(
+          return feeds.concat(
             fetchDataFrom(url)
               .then((data) =>
                 ({
@@ -123,67 +120,68 @@ const retrieveFeedsFrom = async (sources: any) =>
                   data
                 }))
           )
-      },
+        },
         []
       )
   )
 
-api.use('/static', express.static(path.join(__dirname, 'static')))
-
-api.get('/', async (request, response) => {
-  const feeds: any = (await retrieveFeedsFrom(sources))
-
-  const entries: any = feeds
-    .filter(
-      ({ data, config: { type } }: any) =>
-        data != null &&
+api.get('/', (request, response) => {
+  void retrieveFeedsFrom([
+    'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml'
+  ])
+    .then(
+      (feeds) =>
+        feeds
+          .filter(
+            ({ data, config: { type } }: any) =>
+              data != null &&
         (
           {
             rss: data.rss !== undefined,
             atom: data.feed !== undefined
           }[type as string]
         )
-    )
-    .reduce(
-      (entries: any, { url, config: { type, ...options }, data }: any) =>
-        entries.concat(
-          processFeed[type as 'youtube' | 'rss' | 'atom'].extract(data)
-            .map((entry: any) => ({
-              domain: getDomain(url),
-              ...processFeed[type as 'youtube' | 'rss' | 'atom'].normalize(entry, options)
-            })
-            )
-            .filter(
-              ({ categories }: any) =>
-                options.categories && categories
-                  ? categories.some(
-                    (category: any) => options.categories.includes(category)
+          )
+          .reduce(
+            (entries: any, { url, config: { type, ...options }, data }: any) =>
+              entries.concat(
+                processFeed[type as 'youtube' | 'rss' | 'atom'].extract(data)
+                  .map((entry: any) => ({
+                    domain: getDomain(url),
+                    ...processFeed[type as 'youtube' | 'rss' | 'atom'].normalize(entry, options)
+                  })
                   )
-                  : true
-            )
-        ),
-      []
-    )
-    .reduce(
-      (entries: any, entry: any) =>
-        entries.some(({ link }: any) => link === entry.link) === false
-          ? entries.concat(entry)
-          : entries,
-      []
-    )
-    .filter(
-      ({ date }: any) =>
-        ((Date.now() - date) / (1000 * 60 * 60)) <= 24
-    )
-    .sort(
-      ({ date: date1 }: any, { date: date2 }: any) =>
-        date2.valueOf() - date1.valueOf()
-    )
-
-  response.json(entries)
+                  .filter(
+                    ({ categories }: any) =>
+                      options.categories && categories
+                        ? categories.some(
+                          (category: any) => options.categories.includes(category)
+                        )
+                        : true
+                  )
+              ),
+            []
+          )
+          .reduce(
+            (entries: any, entry: any) =>
+              entries.some(({ link }: any) => link === entry.link) === false
+                ? entries.concat(entry)
+                : entries,
+            []
+          )
+          .filter(
+            ({ date }: any) =>
+              ((Date.now() - date) / (1000 * 60 * 60)) <= 24
+          )
+          .sort(
+            ({ date: date1 }: any, { date: date2 }: any) =>
+              date2.valueOf() - date1.valueOf()
+          ))
+    .then((entries) => response.json(entries))
 })
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT ?? 8080
+
 api.listen(PORT, () => {
   console.info(`Running on port ${PORT}`)
 })
