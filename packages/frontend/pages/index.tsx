@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import * as React from 'react'
 
 const getFeed = async () =>
@@ -15,6 +16,10 @@ const App = () => {
 
   return (
     <>
+      <Head>
+        <title>Hullabaloo</title>
+      </Head>
+
       <header>
         <h1>Hullabaloo <small>v0.0.1</small></h1>
       </header>
