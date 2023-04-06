@@ -5,32 +5,52 @@ on:
     branches: [ master ]
 
 jobs:
-  build-container:
-    name: "Build and push container"
+  build-containers:
+    name: "Build and push containers"
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout recent
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
-      - run: |
-          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/index.html
+      - name: Change API address in frontend
+        run: |
+          sed -i 's/http:\/\/localhost:[0-9]\+/https:\/\/feed.jrm.dev\/api/' packages/frontend/pages/index.tsx
+          
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile frontend
+        run: |
+          pushd packages/frontend
+          npm ci
+          npm run build
+          npx next export -o dist
+          popd
+
+      - name: Compile backend
+        run: |
+          pushd packages/backend
+          npm ci
+          npm run build
+          popd
+
 
       - name: Copy environment file
         run: cp .env.example .env
 
-      - name: Copy override file
-        run: cp docker-compose.override.yml.example docker-compose.override.yml
-
       - name: Build containers
         run: docker-compose build
 
-      - name: Login into Docker
-        run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_USER} --password-stdin
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      - name: Login into GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ secrets.USER }} --password-stdin
 
       - name: Push containers
         run: docker-compose push

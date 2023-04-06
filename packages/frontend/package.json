@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "next": "^13.2.4",
+    "typescript": "^5.0.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build"
   },
   "repository": {
     "type": "git",
@@ -17,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/joebobmiles/rss-reader/issues"
   },
-  "homepage": "https://github.com/joebobmiles/rss-reader#readme"
+  "homepage": "https://github.com/joebobmiles/rss-reader#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
