@@ -133,5 +133,6 @@
     "type": "atom"
   },
   "https://antonhowes.substack.com/feed",
-  "https://www.inkandswitch.com/index.xml"
+  "https://www.inkandswitch.com/index.xml",
+  "https://betterwebtype.com/feed.xml"
 ]
