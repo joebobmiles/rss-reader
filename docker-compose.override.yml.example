@@ -1,20 +1,31 @@
 services:
-    frontend:
-        build:
-            dockerfile: ./docker/dev.Dockerfile
-        restart: "no"
-        volumes:
-            - ./packages/frontend:/srv/hullabaloo
-            # Weird trick to exclude sub-folder
-            # https://stackoverflow.com/a/37898591
-            - /srv/hullabaloo/node_modules
-        env_file: .env
-
     backend:
         build:
+            context: ./packages/backend
             dockerfile: ./docker/dev.Dockerfile
+
         restart: "no"
+
         volumes:
             - ./packages/backend:/srv/hullabaloo
             - ./node_modules:/srv/hullabaloo/node_modules
-        env_file: .env
+        ports:
+            - 9229:9229
+
+        entrypoint: npm run develop
+
+    frontend:
+        build:
+            context: ./packages/frontend
+            dockerfile: ./docker/dev.Dockerfile
+
+        restart: "no"
+
+        volumes:
+            - ./packages/frontend:/srv/hullabaloo
+            - ./node_modules:/srv/hullabaloo/node_modules
+
+        environment:
+            NEXT_PUBLIC_API_BASE_URL: "$DOCKER_BACKEND_BASE_URL"
+
+        entrypoint: npm run dev
