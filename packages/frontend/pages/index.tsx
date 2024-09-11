@@ -2,7 +2,7 @@ import Head from 'next/head'
 import * as React from 'react'
 
 const getFeed = async () =>
-  await fetch('http://localhost:43115').then(async (r) => await r.json())
+  await fetch(process.env.NEXT_PUBLIC_API_BASE_URL).then(async (r) => await r.json())
 
 const App = () => {
   const [feed, setFeed] = React.useState([])
