@@ -47,10 +47,10 @@ jobs:
         run: cp .env.example .env
 
       - name: Build containers
-        run: docker-compose build
+        run: docker compose build
 
       - name: Login into GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ secrets.USER }} --password-stdin
 
       - name: Push containers
-        run: docker-compose push
+        run: docker compose push
