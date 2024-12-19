@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /srv/hullabaloo
+WORKDIR /app
 
 COPY packages/frontend/package.json ./
 RUN npm install

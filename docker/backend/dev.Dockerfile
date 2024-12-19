@@ -1,9 +1,9 @@
-FROM node:16-alpine3.13
+FROM node:18-alpine
 
 ARG PORT=30000
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-WORKDIR /srv/hullabaloo
+WORKDIR /app
 
 ENTRYPOINT [ "npm", "run", "develop" ]

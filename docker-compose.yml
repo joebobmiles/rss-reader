@@ -18,12 +18,13 @@ services:
     backend:
         image: ghcr.io/joebobmiles/hullabaloo-backend
         build:
-            context: ./packages/backend
-            dockerfile: ./docker/prod.Dockerfile
-            args:
-                PORT: $DOCKER_BACKEND_CLIENT_PORT
+            context: ./
+            dockerfile: ./docker/backend/prod.Dockerfile
 
         restart: unless-stopped
 
         ports:
             - "${DOCKER_BACKEND_HOST_PORT}:${DOCKER_BACKEND_CLIENT_PORT}"
+
+        environment:
+            PORT: "${DOCKER_BACKEND_CLIENT_PORT}"

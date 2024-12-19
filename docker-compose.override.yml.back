@@ -22,8 +22,8 @@ services:
         
     backend:
         build:
-            context: ./
-            dockerfile: ./docker/backend/dev.Dockerfile
+            context: ./packages/backend
+            dockerfile: ./docker/dev.Dockerfile
 
         restart: "no"
 
