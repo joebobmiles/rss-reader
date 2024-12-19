@@ -11,7 +11,7 @@ services:
             - "${DOCKER_FRONTEND_HOST_PORT}:${DOCKER_FRONTEND_CLIENT_PORT}"
 
         environment:
-            HOSTNAME: "localhost"
+            HOSTNAME: "0.0.0.0"
             PORT: "${DOCKER_FRONTEND_CLIENT_PORT}"
             NEXT_PUBLIC_API_BASE_URL: "${DOCKER_BACKEND_BASE_URL}"
 

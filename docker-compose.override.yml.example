@@ -1,4 +1,25 @@
 services:
+    frontend:
+        build:
+            context: ./
+            dockerfile: ./docker/frontend/dev.Dockerfile
+
+        restart: "no"
+
+        volumes:
+            - ./packages/frontend/pages:/srv/hullabaloo/pages
+            - ./packages/frontend/public:/srv/hullabaloo/public
+            - ./node_modules:/srv/hullabaloo/node_modules
+        ports:
+            - "${DOCKER_FRONTEND_HOST_PORT}:${DOCKER_FRONTEND_CLIENT_PORT}"
+
+        environment:
+            HOSTNAME: "0.0.0.0"
+            PORT: "${DOCKER_FRONTEND_CLIENT_PORT}"
+            NEXT_PUBLIC_API_BASE_URL: "${DOCKER_BACKEND_BASE_URL}"
+
+        entrypoint: npm run dev
+        
     backend:
         build:
             context: ./packages/backend
@@ -10,22 +31,6 @@ services:
             - ./packages/backend:/srv/hullabaloo
             - ./node_modules:/srv/hullabaloo/node_modules
         ports:
-            - 9229:9229
+            - "${DOCKER_BACKEND_HOST_PORT}:${DOCKER_BACKEND_CLIENT_PORT}"
 
         entrypoint: npm run develop
-
-    frontend:
-        build:
-            context: ./packages/frontend
-            dockerfile: ./docker/dev.Dockerfile
-
-        restart: "no"
-
-        volumes:
-            - ./packages/frontend:/srv/hullabaloo
-            - ./node_modules:/srv/hullabaloo/node_modules
-
-        environment:
-            NEXT_PUBLIC_API_BASE_URL: "$DOCKER_BACKEND_BASE_URL"
-
-        entrypoint: npm run dev
