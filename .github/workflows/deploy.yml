@@ -23,21 +23,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Compile frontend
-        run: |
-          pushd packages/frontend
-          npm ci
-          npm run build
-          npx next export -o dist
-          popd
-
-      - name: Compile backend
-        run: |
-          pushd packages/backend
-          npm ci
-          npm run build
-          popd
-
       - name: Copy environment file
         run: cp .env.example .env
 
