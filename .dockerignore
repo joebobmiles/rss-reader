@@ -1,6 +1,8 @@
-node_modules/
 .vscode/
 .github/
+.next/
+.git/
+node_modules/
 LICENSE
 README.md
 docker-compose.*

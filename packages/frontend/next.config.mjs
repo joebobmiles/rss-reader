@@ -10,7 +10,8 @@ const config = {
         poll: true
       }
     }
-  }
+  },
+  output: 'standalone'
 }
 
 export default config
