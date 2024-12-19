@@ -14,8 +14,15 @@ RUN npm ci
 # 2. Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+# Copy in deps, source code
 COPY --from=deps /app/node_modules ./node_modules
 COPY packages/frontend ./
+
+# Set required environment variables
+ARG NEXT_PUBLIC_API_BASE_URL
+
+# Build
 RUN npm run build
 
 # 3. Production image, copy all the files and run next
